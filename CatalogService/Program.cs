@@ -1,12 +1,11 @@
-
-using CatalogService.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+using CatalogService.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddGrpc();
-builder.Services.AddDbContext<CatalogDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder
+    .AddGrpc()
+    .AddDataBase()
+    .AddApplicationServices();
 
 var app = builder.Build();
 

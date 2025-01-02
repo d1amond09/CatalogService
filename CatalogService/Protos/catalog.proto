@@ -2,20 +2,16 @@ syntax = "proto3";
 
 option csharp_namespace = "CatalogService";
 
-import "google/protobuf/wrappers.proto"; 
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 
 service Catalog {
-  rpc UpdateBookStock(UpdateBookStockRequest) returns (UpdateBookStockResponse);
+  rpc GetBooks(google.protobuf.Empty) returns (GetBooksResponse);
   rpc GetBook(GetBookRequest) returns (GetBookResponse);
 }
 
-message UpdateBookStockRequest {
-  string book_id = 1; 
-  int32 quantity = 2;
-}
-
-message UpdateBookStockResponse {
-  bool success = 1;
+message GetBooksResponse {
+  repeated GrpcBook books = 1;
 }
 
 message GetBookRequest {
@@ -26,6 +22,12 @@ message GetBookResponse {
   string book_id = 1; 
   string title = 2;
   int32 stock = 3;
-  google.protobuf.StringValue description = 4; 
-  double price = 5; 
+  google.protobuf.StringValue description = 4;
+}
+
+message GrpcBook {
+  string book_id = 1;
+  string title = 2;
+  int32 stock = 3;
+  google.protobuf.StringValue description = 4;
 }

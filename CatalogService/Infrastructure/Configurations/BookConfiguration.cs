@@ -10,8 +10,7 @@ public class BookConfiguration: IEntityTypeConfiguration<Book>
     {
         builder.Property(e => e.Id)
             .IsRequired()
-            .HasDefaultValueSql("NEWID()")
-            .HasColumnName("CourseID");
+            .HasDefaultValueSql("gen_random_uuid()");
 
         builder.Property(e => e.Title)
             .IsRequired()

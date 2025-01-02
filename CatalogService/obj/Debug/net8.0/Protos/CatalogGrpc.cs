@@ -46,21 +46,21 @@ namespace CatalogService {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::CatalogService.UpdateBookStockRequest> __Marshaller_UpdateBookStockRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::CatalogService.UpdateBookStockRequest.Parser));
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Empty.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::CatalogService.UpdateBookStockResponse> __Marshaller_UpdateBookStockResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::CatalogService.UpdateBookStockResponse.Parser));
+    static readonly grpc::Marshaller<global::CatalogService.GetBooksResponse> __Marshaller_GetBooksResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::CatalogService.GetBooksResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::CatalogService.GetBookRequest> __Marshaller_GetBookRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::CatalogService.GetBookRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::CatalogService.GetBookResponse> __Marshaller_GetBookResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::CatalogService.GetBookResponse.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::CatalogService.UpdateBookStockRequest, global::CatalogService.UpdateBookStockResponse> __Method_UpdateBookStock = new grpc::Method<global::CatalogService.UpdateBookStockRequest, global::CatalogService.UpdateBookStockResponse>(
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::CatalogService.GetBooksResponse> __Method_GetBooks = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::CatalogService.GetBooksResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "UpdateBookStock",
-        __Marshaller_UpdateBookStockRequest,
-        __Marshaller_UpdateBookStockResponse);
+        "GetBooks",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_GetBooksResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::CatalogService.GetBookRequest, global::CatalogService.GetBookResponse> __Method_GetBook = new grpc::Method<global::CatalogService.GetBookRequest, global::CatalogService.GetBookResponse>(
@@ -81,7 +81,7 @@ namespace CatalogService {
     public abstract partial class CatalogBase
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::CatalogService.UpdateBookStockResponse> UpdateBookStock(global::CatalogService.UpdateBookStockRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::CatalogService.GetBooksResponse> GetBooks(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -100,7 +100,7 @@ namespace CatalogService {
     public static grpc::ServerServiceDefinition BindService(CatalogBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_UpdateBookStock, serviceImpl.UpdateBookStock)
+          .AddMethod(__Method_GetBooks, serviceImpl.GetBooks)
           .AddMethod(__Method_GetBook, serviceImpl.GetBook).Build();
     }
 
@@ -111,7 +111,7 @@ namespace CatalogService {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CatalogBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_UpdateBookStock, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::CatalogService.UpdateBookStockRequest, global::CatalogService.UpdateBookStockResponse>(serviceImpl.UpdateBookStock));
+      serviceBinder.AddMethod(__Method_GetBooks, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::CatalogService.GetBooksResponse>(serviceImpl.GetBooks));
       serviceBinder.AddMethod(__Method_GetBook, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::CatalogService.GetBookRequest, global::CatalogService.GetBookResponse>(serviceImpl.GetBook));
     }
 

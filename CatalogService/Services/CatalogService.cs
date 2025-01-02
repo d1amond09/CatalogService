@@ -1,38 +1,46 @@
-using CatalogService.Core.Domain.Entities;
+using CatalogService.Core.Application.Contracts;
+using CatalogService.Core.Domain.RequestFeatures;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 
 namespace CatalogService.Services;
 
-public class CatalogService : Catalog.CatalogBase
+public class CatalogService(IBookRepository bookRep) : Catalog.CatalogBase
 {
-    private static readonly List<Book> Books = 
-    [
-        new Book()
-        {
-            Id = new Guid("6B29FC40-CA47-1067-B31D-00DD010662DA"),
-            Title = "C# in Depth",
-            Stock = 10,
-            Description = null
-        }
-    ];
+    private readonly IBookRepository _bookRep = bookRep;  
 
-    public override Task<UpdateBookStockResponse> UpdateBookStock(UpdateBookStockRequest request, ServerCallContext context)
+    public override async Task<GetBookResponse> GetBook(GetBookRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new UpdateBookStockResponse { Success = false });
-    }
-
-    public override Task<GetBookResponse> GetBook(GetBookRequest request, ServerCallContext context)
-    {
-        var book = Books.FirstOrDefault(x => new Guid(request.BookId) == x.Id);
+        var book = await _bookRep.GetBookAsync(new Guid(request.BookId), false);
         if (book != null)
         {
-            return Task.FromResult(new GetBookResponse
+            return new GetBookResponse
             {
                 BookId = request.BookId,
                 Title = book.Title,
                 Stock = book.Stock,
-            });
+                Description = book.Description
+            };
         }
-        throw new RpcException(new Status(StatusCode.NotFound, $"Book not found {request.BookId} != {book?.Id} != {Books.First().Id}"));
+        throw new RpcException(new Status(StatusCode.NotFound, $"Book not found {request.BookId}"));
+    }
+    
+    public override async Task<GetBooksResponse> GetBooks(Empty request, ServerCallContext context)
+    {
+        BookParameters bookParameters = new();
+        var books = await _bookRep.GetAllBooksAsync(bookParameters, false);
+        
+        var grpcBooks = books.Select(book => new GrpcBook
+        {
+            BookId = book.Id.ToString(), 
+            Title = book.Title,
+            Stock = book.Stock,
+            Description = book.Description,
+        }).ToList();
+
+        return new GetBooksResponse
+        {
+            Books = { grpcBooks } 
+        };
     }
 }

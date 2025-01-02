@@ -1,3 +1,4 @@
 obj/Debug/net8.0/Protos/Catalog.cs \
 obj/Debug/net8.0/Protos/CatalogGrpc.cs: /home/d1amond/.nuget/packages/grpc.tools/2.57.0/build/native/include/google/protobuf/wrappers.proto\
+ /home/d1amond/.nuget/packages/grpc.tools/2.57.0/build/native/include/google/protobuf/empty.proto\
  Protos/catalog.proto
